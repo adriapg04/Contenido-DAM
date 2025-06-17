@@ -1,0 +1,102 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .row {
+            text-align: center;
+            align-content: center;
+            color: #f0f0f0;
+            font-size: 45px;
+            background-position: center;
+        }
+
+        hr {
+            height: 3px;
+            background-color: #333;
+        }
+
+        h2 {
+            color: rgb(234, 161, 15);
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="row" id="marvel"
+            style="height: 220px; background-image: url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/10/marvel-vs-dc-comics-2853161.jpg?tf=3840x);">
+            <div class="col alert alert-primary text-center fs-1">
+                Marvel y DC
+            </div>
+        </div>
+        <br>
+        <a href="starwars.html" style="text-decoration: none;">
+            <div url="starwars.html" class="row" id="starwars"
+                style="height: 120px; background-image: url(https://i.pcmag.com/imagery/articles/00vhbqmD2WikWyOTfI7jJMm-1..v1734641406.jpg);">
+                <div class="col alerta alerta-primaria texto-centrado fs-1">
+                    Star Wars
+                </div>
+            </div>
+        </a>
+        <br>
+        <h2>Marvel</h2>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="row" id="fotosMarvel"
+                    style="text-align:center; align-content:center; margin: auto; display:flex; justify-content: space-between; flex-wrap: wrap;">
+                </div>
+            </div>
+        </div>
+        <br>
+        <h2>DC Comics</h2>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="row" id="fotosDC"
+                    style="text-align:center; align-content:center; margin: auto; display:flex; justify-content: space-between; flex-wrap: wrap;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function lecturaJSON() {
+            const respuesta = await fetch('super.json');
+            const datos = await respuesta.json();
+
+            datos.forEach(personaje => {
+                if (personaje.grupo == 'marvel' && personaje.id < 13) {
+
+                    document.getElementById("fotosMarvel").innerHTML +=
+                        `
+                        <div class="col" id="personajes">
+                            <img src="${personaje.imagen1}" style="width:400px; height:400px;">
+                            <h2 style="color: #001f3f; font-size:22px">${personaje.nombre}</h2>
+                        </div>
+                    `;
+                }
+            });
+
+            datos.forEach(personaje => {
+                if (personaje.grupo == 'dc' && personaje.id > 3 && personaje.id < 10) {
+
+                    document.getElementById("fotosDC").innerHTML +=
+                        `
+                        <div class="col" id="personajes">
+                            <img src="${personaje.imagen1}" style="width:400px; height:400px;">
+                            <h2 style="color: #001f3f; font-size:22px">${personaje.nombre}</h2>
+                        </div>
+                    `;
+                }
+            });
+        };
+        lecturaJSON();
+    </script>
+</body>
+</html>

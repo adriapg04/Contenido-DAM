@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido</title>
+    <style>
+        #contenedor {
+            width: 80%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+            margin: auto;
+        }
+
+        .line {
+            width: 100%;
+        }
+
+        li {
+            width: 270px;
+            height: 33px;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            float: right;
+            text-align: center;
+            align-content: center;
+            background-color: white;
+            margin-top: 1px;
+            margin: 0 1px;
+            border: 1px solid black;
+            border-radius: 13px;
+            list-style: none;
+            margin-top: -16px;
+        }
+
+        li:hover {
+            background-color: skyblue;
+            transition: 1s;
+        }
+
+        .line2 {
+            width: 98%;
+            margin-top: 5px;
+            float: right;
+        }
+
+        .articulograndeimg,
+        .articulograndeimg2 {
+            width: 100%;
+            margin: auto;
+            border: 1px solid black;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        .articulograndeimg img,
+        .articulograndeimg2 img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            height: 500px;
+        }
+
+        .articulograndeimg p,
+        .articulograndeimg2 p {
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+            box-sizing: border-box;
+            border: 2px solid black;
+        }
+
+        .contenedortitulo,
+        .contenedortitulo2 {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            text-align: center;
+            width: 80%;
+            padding: 10px;
+            font-size: 100px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenedortitulo h1,
+        .contenedortitulo2 h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .line3 {
+            float: right;
+            width: 98%;
+            margin-top: 22px;
+        }
+
+        .copy {
+            text-align: center;
+            font-size: 20px;
+
+        }
+
+        .agrandador {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <hr class="line">
+        <div class="menuopciones">
+            <ul>
+                <a href="contacto.html">
+                    <li style="float: right; margin-left: 10px">CONTACTO</li>
+                </a>
+                <a href="contenido.html">
+                    <li style="float: right;">CONTENIDO</li>
+                </a>
+                <a href="inicio.html">
+                    <li style="float: right;">INICIO</li>
+                </a>
+            </ul>
+        </div>
+        <hr class="line2">
+
+        <article class="articulograndeimg">
+            <img src="asiainfinita1.jpg">
+            <div class="contenedortitulo">
+                <h1>ASIA INFINITA</h1>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit dui. Maecenas commodo ornare
+                lectus, sed mollis justo venenatis vel. Nam at varius purus. Phasellus id nibh vitae ligula aliquam
+                iaculis in sed ligula. Curabitur posuere vehicula lacus id elementum. Maecenas non erat sed neque
+                dapibus lacinia. Duis dapibus rhoncus.</p>
+        </article>
+
+        <article class="articulograndeimg2">
+            <img src="asiainfinita2.webp">
+            <div class="contenedortitulo2">
+                <h1>ASIA INFINITA</h1>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit dui. Maecenas commodo ornare
+                lectus, sed mollis justo venenatis vel. Nam at varius purus. Phasellus id nibh vitae ligula aliquam
+                iaculis in sed ligula. Curabitur posuere vehicula lacus id elementum. Maecenas non erat sed neque
+                dapibus lacinia. Duis dapibus rhoncus.</p>
+        </article>
+        <hr class="line3">
+        <div class="copy">
+            <p>(C)COPYRIGHT 2022</p>
+        </div>
+        <div class="agrandador">
+        </div>
+    </div>
+</body>
+
+</html>

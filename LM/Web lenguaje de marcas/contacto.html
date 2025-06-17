@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        #contenedor {
+            width: 80%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+            margin: auto;
+        }
+
+        .line {
+            margin-top: 10px;
+            height: 1px;
+            color: black;
+        }
+
+        li {
+            width: 270px;
+            height: 33px;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            float: right;
+            text-align: center;
+            align-content: center;
+            background-color: white;
+            margin-top: 1px;
+            margin: 0 1px;
+            border: 1px solid black;
+            border-radius: 13px;
+            list-style: none;
+            margin-top: -10px;
+        }
+
+        li:hover {
+            background-color: skyblue;
+            transition: 1s;
+        }
+
+        .line2 {
+            margin-top: 50px;
+            height: 1px;
+            color: black;
+        }
+
+        .contenedor1 {
+            margin-top: 30px;
+            text-align: center;
+            border-style: solid;
+            border-color: black;
+            border-width: 2px 2px 1px 2px;
+            background-color: white;
+        }
+
+        .contenedor2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-top: 20px;
+            border-radius: 0%;
+        }
+
+        .info, .mapa {
+            width: 50%; 
+            box-sizing: border-box;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border: 1px solid black;
+            background-color: white;
+            font-size: 19px;
+            height: 300px;
+        }
+
+        .mapa {
+            height: 300px;
+        }
+
+        .contenedor2 iframe {
+            width: 100%;
+            height: 100%; 
+            border: 1px white;
+        }
+
+        .formulariocontacto {
+            margin-top: 30px;
+            text-align: center;
+            border: 2px solid black;
+            background-color: white;
+            font-size: 12px;
+            padding: 20px;
+        }
+
+        .row {
+            margin-top: 25px;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        .row form {
+            padding: 20px;
+        }
+
+        .form-label {
+            color: black;
+        }
+
+        .form-control {
+            border: 1px solid black;
+        }
+
+        .form-floating .form-control {
+            color: black;
+        }
+
+        .line3 {
+            margin-top: 15px;
+            height: 5px;
+            color: black;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .agrandador {
+            width: 100%;
+            height: 30px;
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor">
+        <hr class="line">
+        <div class="menu-recuadro">
+            <ul>
+                <a href="contacto.html">
+                    <li style="float: right; margin-left: 10px">CONTACTO</li>
+                </a>
+                <a href="contenido.html">
+                    <li style="float: right;">CONTENIDO</li>
+                </a>
+                <a href="inicio.html">
+                    <li style="float: right;">INICIO</li>
+                </a>
+            </ul>
+        </div>
+        <hr class="line2">
+        <div class="contenedor1">
+            <h1><strong>DONDE ESTAMOS</strong></h1>
+        </div>
+        <div class="contenedor2">
+            <div class="info">
+                <p><strong>NOMBRE EMPRESA:</strong> TuAgencia</p>
+                <p><strong>DIRECCIÓN:</strong> C/Panama, 20</p>
+                <p><strong>TELEFONO:</strong> 695070060</p>
+                <p><strong>EMAIL:</strong> tuagenciadeviajes@gmail.com</p>
+            </div>
+            <div class="mapa">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48766.04208051191!2d-3.718754021546586!3d40.18953666662698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd421ec0155a7707%3A0xe6f304a39ba292f!2sValdemoro%2C%20Madrid!5e0!3m2!1ses!2ses!4v1733166826179!5m2!1ses!2ses"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="formulariocontacto">
+            <h1><strong>FORMULARIO DE CONTACTO</strong></h1>
+        </div>
+        <div class="row">
+            <form>
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control border border-dark" id="nombreUsuario">
+                </div>
+
+                <div class="mb-3">
+                    <label for="asunto" class="form-label">Asunto</label>
+                    <input type="text" class="form-control border border-dark" id="asunto">
+                </div>
+
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Email</label>
+                    <input type="email" class="form-control border border-dark" id="correo">
+                </div>
+
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control border border-dark" id="mensaje" rows="3"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary float-right">Enviar</button>
+                    <button type="reset" class="btn btn-secondary float-right">Borrar</button>
+                </div>
+            </form>
+        </div>
+        <hr class="line3">
+        <div class="copyright">
+            <p>(C)COPYRIGHT 2022</p>
+        </div>
+        <div class="agrandador">
+        </div>
+    </div>
+</body>
+</html>

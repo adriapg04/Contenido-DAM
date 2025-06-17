@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Nombres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .box {
+            border: 3px solid #000000;
+            border-radius: 5px;
+            padding: 15px;
+            width: 50%;
+            min-height: 300px;
+            background-color: #f8f9fa;
+        }
+        
+        .box h2 {
+            text-align: center;
+            color: #3729b9;
+            margin-top: 0;
+        }
+        
+        .name-item {
+            margin: 8px 0;
+            padding: 10px 15px;
+            background-color: #e0f2fe;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .name-item:hover {
+            background-color: #bae6fd;
+        }
+        
+        .empty-slot {
+            height: 42px;
+            margin: 8px 0;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="leftBox">
+            <h2>Lista original</h2>
+            <div id="leftList"></div>
+        </div>
+        
+        <div class="box" id="rightBox">
+            <h2>Lista de seleccionados</h2>
+            <div id="rightList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Array de nombres
+        const personas = ["Alberto", "Ana", "Pedro", "Paco", "Andrés", "Laura", "Adrián", "Carlota"];
+        
+        // Constante que almacena el estado de cada persona (posicion y ubicacion)
+        const personasState = [];
+        
+        // Inicializacion del estado
+        for (let i = 0; i < personas.length; i++) {
+            personasState.push({
+                nombre: personas[i],
+                posicionOriginal: i,
+                enListaIzquierda: true
+            });
+        }
+        
+        // Carga de nombres en el cuadro izquierdo
+        function cargarListaIzquierda() {
+            const leftList = document.getElementById('leftList');
+            leftList.innerHTML = '';
+            
+            // Creacion de espacios para cada posicion original
+            for (let i = 0; i < personas.length; i++) {
+                const persona = personasState.find(p => p.posicionOriginal === i && p.enListaIzquierda);
+                
+                if (persona) {
+                    // Si hay una persona en esta posicion se crea el cuadro
+                    const nameItem = document.createElement('div');
+                    nameItem.className = 'name-item';
+                    nameItem.textContent = persona.nombre;
+                    nameItem.onclick = function() {
+                        moverADerecha(persona);
+                    };
+                    leftList.appendChild(nameItem);
+                } else {
+                    // Si no la hay, se crea un espacio vacio
+                    const emptySlot = document.createElement('div');
+                    emptySlot.className = 'empty-slot';
+                    leftList.appendChild(emptySlot);
+                }
+            }
+        }
+        
+        // Carga de nombres en el cuadro derecho
+        function cargarListaDerecha() {
+            const rightList = document.getElementById('rightList');
+            rightList.innerHTML = '';
+            
+            // Filtrado de personas movidas para mostrarlas en el cuadro derecho
+            personasState.filter(p => !p.enListaIzquierda).forEach(persona => {
+                const nameItem = document.createElement('div');
+                nameItem.className = 'name-item';
+                nameItem.textContent = persona.nombre;
+                nameItem.onclick = function() {
+                    moverAIzquierda(persona);
+                };
+                rightList.appendChild(nameItem);
+            });
+        }
+        
+        // Funcion que mueve a la persona de la lista izquierda a la derecha
+        function moverADerecha(persona) {
+            persona.enListaIzquierda = false;
+            cargarListaIzquierda();
+            cargarListaDerecha();
+        }
+        
+        // Funcion que mueve a la persona de la lista derecha a la izquierda
+        function moverAIzquierda(persona) {
+            persona.enListaIzquierda = true;
+            cargarListaIzquierda();
+            cargarListaDerecha();
+        }
+        
+        // Inicializacion de listas al cargar la página
+        window.onload = function() {
+            cargarListaIzquierda();
+            cargarListaDerecha();
+        };
+    </script>
+</body>
+</html>

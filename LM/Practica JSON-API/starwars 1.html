@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Verdana', sans-serif;
+        }
+        .row {
+            text-align: center;
+            align-content: center;
+            color: #f8f8f8;
+            font-size: 45px;
+            background-position: center;
+        }
+        button {
+            width: 300px;
+            height: 80px;
+            font-size: 28px;
+            border-radius: 10px;
+            background-color: rgb(8, 241, 187);
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="row" id="starwars" style="height: 220px; background-image: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMHp0n0sgzhcnvzUoMfZj8OOta2Ug6BYytlT6WkMF1FbYnc30rSR77JnzFuHfotiIdKWXkdict92BAWW_o2CV-ETHncyn8sh2uECPnqRjPR3mlFYfWVGkcylDHdc78WQG76nYpjyiNe3zg/s1600/starwars.jpg);">
+            <div class="col alert alert-primary text-center fs-1">
+                STARWARS
+            </div>
+        </div>
+        <br>
+        <div class="row" id="botones" style="display: flex; justify-content: space-between;">
+            <button>PEOPLE</button>
+            <button>PLANETS</button>
+            <button>VEHICLES</button>
+        </div>
+        <br>
+        <div class="contenido" style="display: flex; flex-wrap: wrap; justify-content:center;">
+            <div id="salida" 
+                 style="display: grid; 
+                        grid-template-columns: repeat(2, 1fr); 
+                        row-gap: 20px; 
+                        column-gap: 200px;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function leerApi() {
+            const url = "https://swapi.dev/api/people/";
+            for (let n = 1; n < 11; n++) {
+                const respuesta = await fetch(`${url}${n}`);
+                const datos = await respuesta.json();
+
+                document.getElementById('salida').innerHTML += `
+                    <div style="background-color: #444; color: #fff; width: 500px; padding: 10px; font-size: 18px; text-align: center;">
+                        <strong>Nombre:</strong> ${datos.name} <br>
+                        <strong>Altura:</strong> ${datos.height}<br>
+                        <strong>Peso:</strong> ${datos.mass}<br>
+                        <strong>Color del pelo:</strong> ${datos.hair_color} <br>
+                        <strong>Color de piel:</strong> ${datos.skin_color} <br>
+                        <strong>Color de ojos:</strong> ${datos.eye_color} <br>
+                        <strong>Fecha de nacimiento:</strong> ${datos.birth_year} <br>
+                        <strong>Género:</strong> ${datos.gender}
+                    </div>
+                `;
+            }
+        };
+        leerApi();
+    </script>
+</body>
+</html>
