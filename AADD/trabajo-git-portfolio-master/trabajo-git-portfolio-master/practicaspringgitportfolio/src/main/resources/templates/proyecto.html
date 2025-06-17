@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${proyecto.nombre}">Proyecto</title>
+</head>
+<body>
+<h1 th:text="${proyecto.nombre}">Nombre del Proyecto</h1>
+<p><strong>Descripción:</strong> <span th:text="${proyecto.descripcion}"></span></p>
+<p><strong>Imagen:</strong> <img th:src="${proyecto.imagen}" alt="Imagen del proyecto" width="200"></p>
+<p><strong>URL:</strong> <a th:href="${proyecto.url}" th:text="${proyecto.url}"></a></p>
+</body>
+</html>
