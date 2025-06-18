@@ -1,0 +1,17 @@
+﻿<Window x:Class="Ejercicio4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ejercicio 4 - MySQL"
+        Height="250" Width="400"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <StackPanel Margin="10">
+        <TextBlock Text="Ejercicio 4: Persistir config de varios usuarios en MySQL"
+                   FontSize="16" Margin="0,0,0,10"/>
+        <TextBlock Text="Usuario:"/>
+        <TextBox   x:Name="txtUsuario"
+                   Margin="0,0,0,10"
+                   LostFocus="txtUsuario_LostFocus"/>
+        <TextBlock x:Name="lblInfo" Text="(aquí se mostrará la config)" />
+    </StackPanel>
+</Window>

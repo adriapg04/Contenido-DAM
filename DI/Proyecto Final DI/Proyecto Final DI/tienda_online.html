@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Tienda Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Estilos de navegacion */
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar h1 {
+            font-size: 1.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Componente Button reutilizable */
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #229954;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Vista oculta por defecto */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Estilos para la vista principal */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Componente Card reutilizable */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ddd, #f0f0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #999;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Formulario */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Detalles del producto */
+        .product-detail {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .product-detail-img {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #ddd, #f0f0f0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #999;
+        }
+
+        .product-detail-info h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-price {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegacion -->
+    <nav class="navbar">
+        <h1>🛒 TechStore</h1>
+        <div class="nav-buttons">
+            <button class="btn btn-primary" onclick="showView('home')">Inicio</button>
+            <button class="btn btn-primary" onclick="showView('form')">Añadir Producto</button>
+            <button class="btn btn-secondary" onclick="showView('detail')">Ver Detalles</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Vista 1: pantalla principal -->
+        <div id="home" class="view active">
+            <div class="hero">
+                <h2>Bienvenido a TechStore</h2>
+                <p>Los mejores productos tecnológicos al mejor precio</p>
+                <button class="btn btn-success" onclick="scrollToProducts()">Ver Productos</button>
+            </div>
+
+            <div class="products-grid" id="products-container">
+                <!-- Los productos se cargan dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Vista 2: formulario de producto -->
+        <div id="form" class="view">
+            <div class="form-container">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">Añadir Nuevo Producto</h2>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label class="form-label" for="product-name">Nombre del Producto</label>
+                        <input type="text" id="product-name" class="form-input" placeholder="Ej: iPhone 14 Pro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="product-price">Precio (€)</label>
+                        <input type="number" id="product-price" class="form-input" placeholder="999.99" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="product-category">Categoría</label>
+                        <select id="product-category" class="form-input" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="accessory">Accesorio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="product-description">Descripción</label>
+                        <textarea id="product-description" class="form-input form-textarea" placeholder="Describe las características principales del producto..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="product-stock">Stock Disponible</label>
+                        <input type="number" id="product-stock" class="form-input" placeholder="50" min="0" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem;">
+                        Guardar Producto
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Vista 3: detalles del producto -->
+        <div id="detail" class="view">
+            <div class="product-detail">
+                <div class="product-detail-grid">
+                    <div class="product-detail-img" id="detail-image">
+                        📱
+                    </div>
+                    <div class="product-detail-info">
+                        <h2 id="detail-title">iPhone 14 Pro Max</h2>
+                        <div class="product-detail-price" id="detail-price">€1.199,99</div>
+                        <p id="detail-description">
+                            El iPhone 14 Pro Max redefine lo que significa ser Pro. Con el revolucionario chip A16 Bionic, 
+                            cámaras avanzadas y una pantalla Super Retina XDR de 6.7 pulgadas.
+                        </p>
+                        
+                        <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: #2c3e50;">Características:</h3>
+                        <ul class="features-list" id="detail-features">
+                            <li>Chip A16 Bionic</li>
+                            <li>Sistema de cámaras Pro de 48MP</li>
+                            <li>Pantalla Super Retina XDR de 6.7"</li>
+                            <li>Resistencia al agua IP68</li>
+                            <li>5G ultrarrápido</li>
+                        </ul>
+
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                            <button class="btn btn-success" onclick="addToCart()">Añadir al Carrito</button>
+                            <button class="btn btn-primary" onclick="buyNow()">Comprar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estructura de datos JSON - Simula componentes y datos
+        const appData = {
+            products: [
+                {
+                    id: 1,
+                    name: "iPhone 14 Pro",
+                    price: 1199.99,
+                    category: "smartphone",
+                    description: "El smartphone más avanzado de Apple",
+                    stock: 25,
+                    icon: "📱",
+                    features: ["Chip A16 Bionic", "Cámara 48MP", "Pantalla ProMotion"]
+                },
+                {
+                    id: 2,
+                    name: "MacBook Air M2",
+                    price: 1499.99,
+                    category: "laptop",
+                    description: "Portátil ultraligero con chip M2",
+                    stock: 15,
+                    icon: "💻",
+                    features: ["Chip M2", "Pantalla Liquid Retina", "Batería 18h"]
+                },
+                {
+                    id: 3,
+                    name: "iPad Pro 12.9",
+                    price: 1299.99,
+                    category: "tablet",
+                    description: "Tablet profesional con chip M2",
+                    stock: 30,
+                    icon: "📱",
+                    features: ["Chip M2", "Pantalla XDR", "Apple Pencil compatible"]
+                }
+            ],
+            ui: {
+                theme: {
+                    primaryColor: "#3498db",
+                    successColor: "#27ae60",
+                    dangerColor: "#e74c3c",
+                    backgroundColor: "#f5f5f5"
+                },
+                components: {
+                    button: {
+                        borderRadius: "5px",
+                        padding: "0.5rem 1rem",
+                        transition: "all 0.3s ease"
+                    },
+                    card: {
+                        borderRadius: "10px",
+                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                        hoverTransform: "translateY(-5px)"
+                    }
+                }
+            }
+        };
+
+        // Funciones de navegacion
+        function showView(viewId) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            // Mostrar la vista seleccionada
+            document.getElementById(viewId).classList.add('active');
+            
+            // Cargar datos especificos segun la vista
+            if (viewId === 'home') {
+                loadProducts();
+            }
+        }
+
+        // Cargar productos en la vista principal
+        function loadProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+            
+            appData.products.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+
+        // Componente reutilizable: Tarjeta de producto
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-img">${product.icon}</div>
+                <div class="card-body">
+                    <h3 class="card-title">${product.name}</h3>
+                    <p class="card-description">${product.description}</p>
+                    <div class="card-price">€${product.price}</div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <button class="btn btn-primary" onclick="viewProductDetail(${product.id})">Ver Detalles</button>
+                        <button class="btn btn-success" onclick="addToCart(${product.id})">Añadir</button>
+                    </div>
+                </div>
+            `;
+            
+            // Eventos
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+            
+            return card;
+        }
+
+        // Ver detalles del producto
+        function viewProductDetail(productId) {
+            const product = appData.products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('detail-image').textContent = product.icon;
+                document.getElementById('detail-title').textContent = product.name;
+                document.getElementById('detail-price').textContent = `€${product.price}`;
+                document.getElementById('detail-description').textContent = product.description;
+                
+                const featuresList = document.getElementById('detail-features');
+                featuresList.innerHTML = '';
+                product.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresList.appendChild(li);
+                });
+            }
+            showView('detail');
+        }
+
+        // Manejar formulario
+        document.getElementById('product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('product-name').value,
+                price: parseFloat(document.getElementById('product-price').value),
+                category: document.getElementById('product-category').value,
+                description: document.getElementById('product-description').value,
+                stock: parseInt(document.getElementById('product-stock').value)
+            };
+            
+            // Simular guardado exitoso
+            alert('✅ Producto guardado exitosamente!');
+            this.reset();
+            showView('home');
+        });
+
+        // Funciones de interaccion
+        function addToCart(productId) {
+            alert('🛒 Producto añadido al carrito!');
+        }
+
+        function buyNow() {
+            alert('💳 Redirigiendo al proceso de compra...');
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products-container').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Inicializar la aplicacion
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+        });
+    </script>
+</body>
+</html>
