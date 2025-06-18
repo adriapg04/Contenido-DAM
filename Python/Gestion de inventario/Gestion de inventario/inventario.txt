@@ -1,0 +1,5 @@
+Portátil,799.99,10
+Teléfono,299.99,5
+Tablet,499.99,10
+Auriculares,59.99,15
+Monitor,199.99,23
